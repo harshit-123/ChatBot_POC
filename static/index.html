@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiZone Data Surgeon </title>
+    <link rel="shortcut icon" href="{% static './Assets/icon/svg/fav-icon.svg' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static css %}">
+
+</head>
+
+<body class="position-relative" id="body">
+    <input type="hidden" name="success_res" id="success_res" value="{{success_res}}">
+    <input type="hidden" name="reload_check" id="reload_check" value="{{reload}}">
+    <header>
+        <section class="hero-bg">
+            <div class="container-md h-100vh d-flex flex-column text-align-left px-4">
+                <nav>
+                    <nav-item>
+                        <a href="#"><img src="{% static './Assets/svg/white-logo.svg' %}" alt="Pizone Logo"
+                                class="mt-md-4 white-logo"></a>
+                    </nav-item>
+                </nav>
+                <div class="hero flex-grow-1 justify-content-center mb-5">
+                    <div class="hero-items d-flex justify-content-end flex-column h-100">
+                        <div class="hero-list d-flex align-items-center ">
+                            <span class="count bg-radial">
+                                <p class="fs-30 fw-600 cl-white lh-sm pb-3">.</p>
+                            </span>
+                            <span class="list-box">
+                                <p class="fs-20 fw-600 cl-black">
+                                    Drag and Drop PDF
+                                </p>
+                            </span>
+                        </div>
+                        <div class="hero-list d-flex align-items-center ">
+                            <span class="count bg-radial">
+                                <p class="fs-30 fw-600 cl-white lh-sm pb-3">.</p>
+                            </span>
+                            <span class="list-box">
+                                <p class="fs-20 fw-600 cl-black">
+                                    Let AI Customize ChatBot on Data
+                                </p>
+                            </span>
+                        </div>
+                        <div class="hero-list d-flex align-items-center ">
+                            <span class="count bg-radial">
+                                <p class="fs-30 fw-600 cl-white lh-sm pb-3">.</p>
+                            </span>
+                            <span class="list-box">
+                                <p class="fs-20 fw-600 cl-black">
+                                    Interact with Customer
+                                </p>
+                            </span>
+                        </div>
+                        <a href="#" class="btn bg-radial fs-22 fw-500 cl-white mt-2 mb-4" id="show-main"
+                            onclick="showmain()">Get Started
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </header>
+    <img src="{% static './Assets/svg/animated-lines.svg' %}" alt="animated-lines" class="animated-line">
+    <img src="{% static './Assets/svg/animated-lines.svg' %}" alt="animated-lines" class="animated-line-2">
+    <img src="{% static './Assets/svg/animated-lines.svg' %}" alt="animated-lines" class="animated-line-3">
+    <img src="{% static './Assets/svg/animated-lines.svg' %}" alt="animated-lines" class="animated-line-4">
+    <main class="position-relative overflow-x-hidden d_none" id="main-section">
+
+        <section class="drag-section-bg drag-section">
+            <img src="{% static './Assets/svg/curve.svg' %}" alt="#" class="position-absolute top-0 w-100">
+            <div class="container-md h-100vh d-flex align-items-center flex-column justify-content-center text-align-center z-3"
+                id="pdf-container">
+                <!-- stage 1 -->
+                <div class="upload-fun mt-3 mt-md-5 pt-5 mb-3 mb-md-5 pb-5" id="pdf-upload">
+                    <div class="text-align-center drag-cont">
+                        <div style="display: none;" class="upload-graphic pdf-text" id="robot">
+                            <img src="{% static './Assets/svg/robot.svg' %}" alt="after-pdf-upload-img" class="after-pdf-upload"
+                                id="robot-img">
+                        </div>
+                        <h2 id="uploadingData" class="fs-44 fw-700">
+                            Upload PDF
+                        </h2>
+                        <p style="display: none;" class="fs-24 fw-500 mt-3" id="uploaded">Up to 2mb size</p>
+                    </div>
+                    <div class="pdf-text">
+                        <div style="display: none;" class="" id="uploaded-image">
+                            <img src="{% static './Assets/svg/after-pdf-upload-img.svg' %}" alt="after-pdf-upload-img"
+                                class="after-pdf-upload" id="pdfImage">
+                        </div>
+
+                        <div class="upload-graphic pdf-info pt-3" id="drag-section">
+                            <img src="{% static './Assets/svg/pdf-img.svg' %}" (onClick)="filevalue()" alt="">
+                        </div>
+
+                    </div>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div id="dynamic_file"></div>
+                        <div id="uploadText" style="display: none;" class=" flex-column align-items-center gap-4">
+                            <a onclick="enableUpload()" class="btn-underline" id="drag-section-2"> Upload Different
+                                <input type="text" value="" class="drop-zone_input" accept=".pdf">
+                            </a>
+                        <button type="submit" class="btn-3">Let’s Interact with ChatBot</button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </section>
+        <img src="{% static './Assets/svg/curve.svg' %}" alt="#" class="curve">
+        <section style="display: none;">
+
+            <div class="container-md text-align-center">
+                <div>
+                    <div class="mb-5">
+                        <h2 class="fs-44 fw-700">Choose Your Plan </h2>
+                        <p class="fs-20 fw-700">14 days unlimited free trial. No Credit Card Required.</p>
+                        <div class="d-flex align-items-center justify-content-center gap-3 my-4">
+                            <p class="fs-20 fw-600 cl-blue">Monthly</p>
+                            <label class="toggle">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                            <p class="fs-20 fw-600">Yearly</p>
+                        </div>
+                    </div>
+                    <div class="cards mb-4">
+                        <div class="card">
+                            <div class="">
+                                <p class="fs-28 fw-500 cl-black card-h">Starter</p>
+                                <div class="d-flex align-items-center justify-content-center gap-2">
+                                    <p class="cl-blue fs-46 fw-600 pt-1">$89</p> <span class="fs-16 fw-500">/ MO</span>
+                                </div>
+                            </div>
+                            <div class=" d-flex flex-column gap-4 mt-5">
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Lacus eget sodales enim vel.</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Sed nam aenean potenti in</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Platea libero velit augue nisi</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Purus at tellus senectus</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Quis rutrum egestas facilisis</p>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="">
+                                <p class="fs-28 fw-500 cl-black card-h">Pro</p>
+                                <div class="d-flex align-items-center justify-content-center gap-2">
+                                    <p class="cl-blue fs-46 fw-600 pt-1">$120</p> <span class="fs-16 fw-500">/ MO</span>
+                                </div>
+                            </div>
+                            <div class=" d-flex flex-column gap-4 mt-5">
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Lacus eget sodales enim vel.</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Sed nam aenean potenti in</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Platea libero velit augue nisi</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Purus at tellus senectus</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Quis rutrum egestas facilisis</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Sed nam aenean potenti in</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Full Access</p>
+                                </span>
+                                <a href="#" class="btn-2 bg-radial fs-22 fw-500 cl-white mt-3 mt-md-5 mb-3 ">Select</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="">
+                                <p class="fs-28 fw-500 cl-black card-h">Enterprise</p>
+                                <div class="d-flex align-items-center justify-content-center gap-2">
+                                    <p class="cl-blue fs-46 fw-600 pt-1">$150</p> <span class="fs-16 fw-500">/ MO</span>
+                                </div>
+                            </div>
+                            <div class=" d-flex flex-column gap-4 mt-5">
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Lacus eget sodales enim vel.</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Sed nam aenean potenti in</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Purus at tellus senectus</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Quis rutrum egestas facilisis</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Sed nam aenean potenti in</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Sed nam aenean potenti in</p>
+                                </span>
+                                <span class="card-links">
+                                    <img src="{% static './Assets/icon/svg/check-icon.svg' %}" alt="Check Icon">
+                                    <p class="fs-20 fw-500 ps-3 cl-black">Full Access</p>
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="mt-5 text-align-center">
+            <p class="fs-28 fw-500 bg-radial cl-white py-3">
+                Powered By PiZone AI
+            </p>
+        </footer>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/drag&drop.js' %}"></script>
+    <script>
+        success_res = document.querySelector('#success_res').value
+        console.log(document.getElementById('reload_check').value)
+        if(document.getElementById('success_res').value == 'True'){
+            document.getElementById('robot').style.display = 'block'
+            document.getElementById("uploadingData").innerHTML = "Launching Chat Bot";
+            document.getElementById("uploaded").style.display = "none";
+            document.getElementById("uploaded-image").style.display = "none";
+            document.getElementById("uploadText").style.display = "none";
+            document.getElementById("robot").style.display = "block";
+            document.getElementById("robot-img").style.height = "600px";
+            document.getElementById("robot-img").style.width = "580px";
+            document.getElementById("robot-img").style.paddingBottom = "60px";
+            document.getElementById("drag-section").style.display = "none";
+            setTimeout(() => {
+                window.location.href = "api/v1/chatInterface";
+            }, 6000);
+        }
+        function enableUpload(){
+            console.log("uploading..")
+            document.getElementById('drag-section').style.display = 'block'
+        }
+    </script>
+</body>
+
+</html>

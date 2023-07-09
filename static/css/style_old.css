@@ -1,0 +1,619 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+p {
+  margin: 0;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: #000000;
+}
+
+.d_none {
+  display: none;
+}
+
+/* font-size */
+.fs-30 {
+  font-size: 30px;
+}
+
+.fs-22 {
+  font-size: 22px;
+}
+
+.fs-24 {
+  font-size: 24px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-44 {
+  font-size: 44px;
+}
+
+.fs-46 {
+  font-size: 46px;
+}
+
+.fs-28 {
+  font-size: 28px;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-30 {
+  font-size: 30px;
+}
+
+/* font-wight */
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+.fw-800 {
+  font-weight: 800;
+}
+
+/* colors */
+.cl-white {
+  color: #ffffff;
+}
+
+.cl-black {
+  color: #000000;
+}
+
+.cl-blue {
+  color: #1b4a55;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-light-blue {
+  background-color: #f2f7f9;
+}
+
+.hero-bg {
+  background: url(/static/Assets/png/hero-bg-2.png), no-repeat;
+  object-fit: none;
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: contain;
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
+.bg-radial {
+  background-image: radial-gradient(
+    80.18% 80.18% at 46.44% 19.9%,
+    #1c4953 0%,
+    #235d6a 100%
+  );
+}
+
+.count {
+  width: 24px;
+  height: 24px;
+  border-radius: 50px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.hero-items {
+  gap: 35px;
+}
+
+.list-box {
+  border-radius: 4.483px;
+  border: 0.64px dashed #000;
+  padding: 25px 20px;
+  margin-left: 35px;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.btn {
+  border-radius: 80px;
+  padding: 26px 50px;
+  width: fit-content;
+}
+
+.btn-2 {
+  border-radius: 80px;
+  padding: 12px;
+}
+.btn-3 {
+  border-radius: 80px;
+  padding: 15px 45px;
+  font-size: 30px;
+  font-weight: 700;
+  background-color: #1b4a55;
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+}
+.btn-underline {
+  font-size: 30px;
+  font-weight: 700;
+  color: #1b4a55;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ffffff;
+  border: 1px solid #20535f;
+  color: #20535f;
+  background-image: none;
+  transition: 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.drag-section-bg {
+  background: url(/Assets/svg/drag-section-bg.svg), no-repeat;
+  object-fit: cover;
+  background-repeat: repeat;
+}
+
+.drag-section-img {
+  z-index: -1;
+}
+
+.upload-fun {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 70px;
+}
+.upload-fun-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 60px;
+}
+.pdf-text {
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.drop-zone_input {
+  display: none;
+}
+
+.after-pdf-upload {
+  width: 170px;
+}
+
+.curve {
+  transform: rotate(180deg);
+  margin-top: -18vw;
+  width: 100%;
+}
+
+/* Toggle button Start */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  transition: 0.4s;
+  border: 1px solid #1e505c;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 3px;
+  background-color: #1e505c;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #ffffff;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Toggle button End */
+
+.cards {
+  display: flex;
+  gap: 1%;
+}
+
+.card {
+  padding: 77px 33px 35px;
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 4px 2px 13px 0px rgba(0, 0, 0, 0.1);
+  width: 32%;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+  /* transition: 3s linear; */
+}
+
+.card:hover {
+  border: 1px solid #1b4a55;
+  transition: 2s linear;
+  /* padding: 77px 33px 35px; */
+}
+
+.card .card-h {
+  position: absolute;
+  top: 35px;
+  width: 100%;
+  left: 0;
+  padding: 5px;
+}
+
+.card:hover .card-h {
+  position: absolute;
+  top: 0;
+  background-color: #1b4a55;
+  width: 100%;
+  left: 0;
+  padding: 5px;
+  color: #ffffff;
+}
+
+.card-links {
+  display: flex;
+  align-items: center;
+}
+
+.left-0 {
+  left: 0;
+}
+.cbot-logo {
+  height: 50px;
+}
+.send-button {
+  width: 89px;
+  height: 89px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-light-radial {
+  background-color: #f2f7f9;
+}
+
+.mt-104 {
+  margin-top: 104px;
+}
+.msg-input {
+  border: none;
+  outline: none;
+}
+
+.input-field {
+  border-radius: 50px;
+}
+.bot-msg {
+  padding: 20px 24px;
+  width: fit-content;
+  background-color: #fff;
+  border-radius: 0 20px 20px;
+}
+.user-msg {
+  padding: 20px 24px;
+  width: fit-content;
+  background-color: #215865;
+  border-radius: 20px 20px 0px;
+  color: #fff;
+}
+.message-area {
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
+}
+.animated-line {
+  animation: animated 5s infinite linear;
+  position: absolute;
+  top: 0;
+  left: 5%;
+  z-index: -1;
+}
+#body {
+  overflow: hidden;
+}
+@keyframes animated {
+  0% {
+    left: 5%;
+    top: 0;
+  }
+  100% {
+    left: 5%;
+    top: 80%;
+  }
+}
+.animated-line-2 {
+  animation: animated-2 5s 2s infinite linear;
+  position: absolute;
+  top: 0;
+  left: 30%;
+  z-index: -1;
+}
+@keyframes animated-2 {
+  0% {
+    left: 30%;
+    top: 0;
+  }
+  100% {
+    left: 30%;
+    top: 80%;
+  }
+}
+.animated-line-3 {
+  animation: animated-3 5s 2s infinite linear;
+  position: absolute;
+  top: 20%;
+  left: -10%;
+  z-index: -1;
+  transform: rotate(270deg);
+}
+@keyframes animated-3 {
+  0% {
+    left: -10%;
+    top: 20%;
+  }
+  100% {
+    left: 100%;
+    top: 20%;
+  }
+}
+.animated-line-4 {
+  animation: animated-4 6s 2s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: -30%;
+  z-index: -1;
+  transform: rotate(270deg);
+}
+@keyframes animated-4 {
+  0% {
+    left: -30%;
+    top: 50%;
+  }
+  100% {
+    left: 100%;
+    top: 50%;
+  }
+}
+/* Media Quireis */
+@media (max-width: 1600px) {
+  h2 {
+    font-size: 34px !important;
+  }
+
+  .upload-graphic img {
+    width: 450px;
+  }
+
+  .white-logo {
+    height: 65px;
+  }
+  .list-box {
+    padding: 14px 20px;
+  }
+  .btn {
+    padding: 14px 50px;
+  }
+  .hero {
+    padding-top: 20vw;
+  }
+}
+
+@media (max-width: 1400px) {
+  .cards {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .card {
+    width: calc(50% - 15px);
+    /* margin-top: 30px; */
+  }
+
+  .card-links p {
+    font-size: 16px !important;
+    text-align: left;
+  }
+
+  .btn {
+    padding: 14px 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+    /* margin-top: 30px; */
+  }
+
+  .hero-bg {
+    background-size: 150%;
+  }
+
+  .card-links {
+    padding: 0 4vw;
+  }
+
+  .fs-28 {
+    font-size: 20px;
+  }
+
+  .fs-44 {
+    font-size: 26px !important;
+  }
+
+  .fs-46 {
+    font-size: 32px !important;
+  }
+
+  .fs-22,
+  .fs-20 {
+    font-size: 18px !important;
+  }
+  .btn-3,
+  .btn-underline {
+    font-size: 22px !important;
+  }
+
+  .hero {
+    padding-left: 30px;
+  }
+
+  .white-logo {
+    margin-left: 20px;
+  }
+  .pdf-text {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 500px) {
+  .h-100vh {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .upload-graphic img {
+    width: 100%;
+  }
+
+  .list-box {
+    padding: 14px 20px;
+    border: none;
+    margin-left: 0px;
+  }
+
+  .hero {
+    padding-left: 12px;
+  }
+
+  .fs-20 {
+    font-size: 16px !important;
+  }
+
+  .btn-3,
+  .btn-underline {
+    font-size: 18px !important;
+  }
+}
+
+@media (max-width: 475px) {
+  .hero {
+    padding-top: 95vw;
+  }
+
+  nav {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-image: radial-gradient(#1a3e46, #1b4953);
+    z-index: 1;
+  }
+
+  .hero-bg {
+    background-position: right 60px;
+  }
+
+  .hero-items {
+    gap: 5px;
+  }
+
+  .white-logo {
+    height: 45px;
+    margin-left: 10px;
+  }
+}
+
+.chat_loader{
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+}
+
+

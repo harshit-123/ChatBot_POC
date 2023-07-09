@@ -1,0 +1,35 @@
+# Ignore system-specific files
+*.pyc
+__pycache__/
+venv/
+*.sqlite3
+
+# Ignore development-related files and directories
+*.venv
+*.log
+*.swp
+*.swo
+*.swn
+*.bak
+*.pyc
+*.pyo
+*.orig
+local_settings.py
+media/
+static/
+
+# Ignore sensitive or private information
+secret_key.txt
+settings_local.py
+
+# Ignore IDE and editor-specific files
+.vscode/
+.idea/
+*.pyc
+
+# Ignore compiled translations
+locale/
+
+# Ignore package manager files
+pip-lock.txt
+pipenv.lock

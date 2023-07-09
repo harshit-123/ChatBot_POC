@@ -1,0 +1,23 @@
+{% extends 'basic.html' %}
+{% block title %}Home Page{% endblock title %}
+{% block body %}
+    <div class="container mx-auto mt-3">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="text-center">Upload Your PDF Here</h2>
+            {% if messages %}
+              {% for msg in messages %}
+              <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                {{msg.message}}
+              </div>
+              {% endfor %}
+            {% endif %}
+              <div class="mb-3">
+                <label for="formFile" class="form-label">Upload PDF</label>
+                <input class="form-control" multiple required type="file" id="pdf" name="pdf">
+              </div>
+              <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+{% endblock body %}

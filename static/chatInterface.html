@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiZone Data Surgeon </title>
+    <link rel="shortcut icon" href="{% static './Assets/icon/svg/fav-icon.svg' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
+</head>
+
+<body class="bg-light-radial">
+    <section>
+        <div class="container-fluid position-relative h-100vh row">
+            <div class="navbar bg-blue position-fixed w-100 left-0 px-3 px-md-5 py-3">
+                <a href="/">
+                    <img src="{% static './Assets/svg/Chat Pizone Logo.svg' %}" alt="white-logo" class="cbot-logo">
+                </a>
+                <p class="fs-24 fw-500 cl-white">PiZone Data Sergeon</p>
+                <ul class="nav-list d-flex align-items-center gap-3">
+                    <a href="/">
+                        <li class="fs-24 cl-white">Exit</li>
+                    </a>
+                    <a href="./index.html">
+                        <li><img src="{% static './Assets/icon/svg/exit.svg' %}" alt=""></li>
+                    </a>
+                </ul>
+            </div>
+            <div class="flex-grow-1  row gap-3 flex-wrap-unset">
+                <div class="side-panel col-3 bg-blue d-flex align-items-center">
+                    <img src="{% static './Assets/svg/ai-img-chat-bot.svg' %}" alt="ai-img-chat-bot" class="w-100">
+                </div>
+                <div class="message-area flex-grow-1 d-flex flex-column  col-9 mt-104 " >
+                    <div class="message-area flex-grow-1 gap-3 d-flex flex-column  px-2 py-4" id="targetUserDiv">
+                        <div class="msg d-flex align-items-center gap-3">
+                            <img src="{% static './Assets/svg/bot-msg-img.svg' %}" alt="bot-msg-img" class="bot-msg-img">
+                            <div class="bot-msg">
+                                <span class=" fs-20">
+                                    Hii, How can I help you
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <figure style="display: none;" class="chat_loader" id="chat_loader">
+                        <div class="dot white"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </figure>
+                    <div class="message-input d-flex gap-3">
+                    <div
+                        class="input-field flex-grow-1 bg-white align-items-center align-middle d-flex align-items-center px-xl-5">
+                        <input type="text" placeholder="type here..." id="user_query" class="w-100 msg-input h-75">
+                    </div>
+                    <div class="send-button">
+                        <a href="#" target="" rel="noopener noreferrer"> <img
+                                src="{% static './Assets/icon/svg/send button.svg' %}" onclick="active_user()" alt="send button" class="send-btn-img"> </a>
+                    </div>
+                 </div>
+                </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+    <script>
+    
+        data = []
+        async function active_user(){
+            user_query = document.getElementById('user_query').value
+            var targetUserDiv = document.getElementById("targetUserDiv"); 
+            var newDiv = document.createElement('div'); // is a node
+            newDiv.innerHTML = `<div class="msg d-flex align-items-center gap-3 justify-content-end">
+                            <div class="user-msg">
+                                <span class="fs-20">
+                                    ${user_query}
+                                </span>
+                            </div>
+                            <img src="{% static './Assets/svg/user-msg-img.svg' %}" alt="user-msg-img" class="user-msg-img">
+                        </div>`;
+            document.getElementById('chat_loader').style.display = 'block'
+            targetUserDiv.appendChild(newDiv);
+
+            // POST request using fetch()
+            const data = await fetch("http://127.0.0.1:8000/api/v1/trainModel/", {
+                // Adding method type
+                method: "POST",
+                
+                // Adding body or contents to send
+                body: JSON.stringify({
+                    input_text: user_query,
+                }),
+                
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            const botResponse = await data.json();
+            document.getElementById('chat_loader').style.display = 'none'
+            document.getElementById('user_query').value = ""
+            console.log("===>", botResponse)
+
+            
+            var targetUserDiv = document.getElementById("targetUserDiv"); 
+            var newDiv = document.createElement('div'); // is a node
+            newDiv.innerHTML = `<div class="msg d-flex align-items-center gap-3">
+                            <img src="{% static './Assets/svg/bot-msg-img.svg' %}" alt="bot-msg-img" class="bot-msg-img">
+                            <div class="bot-msg">
+                                <span class=" fs-20">
+                                    ${botResponse.response}
+                                </span>
+                            </div>
+                        </div>`;
+            targetUserDiv.appendChild(newDiv);
+            
+        }
+    </script>
+</body>
+
+</html>
